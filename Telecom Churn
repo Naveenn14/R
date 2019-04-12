@@ -34,7 +34,7 @@ tell$No.ofobs.<- nrow(tel)
 #getting no of unique values in each columns and adding them using unique
 for(i in 1:ncol(tel))
 {
-tellSuniquevalues[i] <-1ength(unique(tel[4]))
+tel1$uniquevalues[i] <-1ength(unique(tel[4]))
 }
 
 #find the observations available and percent by using !is.na
@@ -458,10 +458,10 @@ dat47$varname<-rep("drop_dat_mean",nrow(dat47))
 #drop_vce_mean
 summary(telnew$drop_vce_mean)
 telnew%>%fflutate(dec=ntile(drop_vce_mean,n=10))%>%count(churn,dec)%>95filter(churn==1)->dat48
-dat48$N<-unclass(telnew%>%Mutate(dec=ntile(drop_vce_mean,n=10))%>%count(dec)%>%unname())[[2]J
+dat48$N<-unclass(telnew%>%Mutate(dec=ntile(drop_vce_mean,n=10))%>%count(dec)%>%unname())[[2]]
 dat48$churn_perc<-dat48$n/dat48$N
-dat48$GreaterThan<-unclass(telnew%>%Mutate(dec=ntile(drop_vce_mean,n=10))%>%group_by(dec)%>%$ummarise(min(drop_vce_mean)))[[2]J
-dat48$LessThan<-unclass(telnew%>%Mutate(dec=ntile(drop_vce_mean,n=10))%>%group_by(dec)%>%$ummarise(max(drop_vce_mean)))[[2]J
+dat48$GreaterThan<-unclass(telnew%>%Mutate(dec=ntile(drop_vce_mean,n=10))%>%group_by(dec)%>%$ummarise(min(drop_vce_mean)))[[2]]
+dat48$LessThan<-unclass(telnew%>%Mutate(dec=ntile(drop_vce_mean,n=10))%>%group_by(dec)%>%$ummarise(max(drop_vce_mean)))[[2]]
 dat48$varname<-rep("drop_vce_mean",nrow(dat48))
 
 #adjmou
@@ -556,14 +556,14 @@ dat55$var.Name<-rep("crclscod",nrow(dat55))
 #asl_flag
 summary(telnew$asl_flag)
 telnew%>%count(churn,levels=asl_flag)%>%filter(churn==1)->dat56
-dat56$N<-unclass(telnew%>%filter(asl_flag%in%dat56$levels)%>%count(asl_flag))[(2]]
+dat56$N<-unclass(telnew%>%filter(asl_flag%in%dat56$levels)%>%count(asl_flag))[[2]]
 dat56$churnperc<-dat56$n/dat56$N
 dat56$var.Name<-rep("asl_flag",nrow(dat56))
 
 #prizm_social_one
 summary(telnew$prizm_social_one)
 telnew%>%count(churn,levels=prizm_social_one)%>%filter(churn-1)->dat57
-dat57$N<-unclass(telneW%>%filter(prizm_social_one%in%dat57$levels)%>%count(prizm_social_one))[(2]]
+dat57$N<-unclass(telneW%>%filter(prizm_social_one%in%dat57$levels)%>%count(prizm_social_one))[[2]]
 dat57$churnperc<-dat57$n/dat57$N
 dat57$var.Name<-rep("prizm_social_one",nrow(dat57))
 
@@ -778,7 +778,7 @@ telnew$avg6qty[is.na(telnew$avg6qty)]<-mean(telnew$avg6qty,na.rm = T)
 telnew$hnd_price[is.na(telnew$hnd_price)]<-mean(telnew$hnd_price,na.rm = T)
 summary(telnew)
 
-wcreating separate category 'missing' for factor variables
+#creating separate category 'missing' for factor variables
 
 #prizm_socia_one
 telnew$prizm_social_one_1<-ifelse(is.na(telnew$prizm_social_one),"missing",as.factor(telnew$prizm_social_one))
@@ -1145,8 +1145,8 @@ table(test$churn)
 
 #ROCR curve
 #11brary(R0cR)
-#pred2r-prediction(predl,test$churn)
-#prefr-performance(pred2,"tpr","fpr")
+#pred2<-prediction(predl,test$churn)
+#pred<-performance(pred2,"tpr","fpr")
 #plot(pref,col="red")
 #abline(0,1,1ty=8,col="grey")
 #aucr-performance(pred2,"auc")
@@ -1189,12 +1189,12 @@ Revenue_Levels<-ffelse(test$totrev<670.660,"Low_Revenue",ifelse(test$totrev>=670
 table(Revenue_Levels)
 table(pred2,Revenue_Levels)
 
-# This table can be used to extract the levels of customers to be targeted
+#This table can be used to extract the levels of customers to be targeted
 test$prob_levels<-pred2
 test$Revenue_Levels<-Revenue_Levels
 
-Targeted_Customersips<-test[test$prob_levels=="High_score" & test$Revenue_Levels="High_Revenue","customer_m"]
-Targeted_Customersips<-as.data.frame(Targeted_Customersips)
+Targeted_Customersips<-test[test$prob_levels=="High_score" & test$Revenue_Levels="High_Revenue","customer_ID"]
+Targeted_Customersips<-as.data.frame(Targeted_CustomersIDs)
 nrow(Targeted_CustomersIps)
 
 write.csv(Targeted_customersins,"High_Revenue_Target_customers.csv",row.names=F)
